@@ -1,0 +1,53 @@
+.main-selector {
+    width: 500px;
+    display: flex;
+    flex-flow: column;
+}
+
+.select {
+    margin-top: 10px;
+    min-height: auto;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.main-input {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    height: 20px;
+}
+
+.input {
+    width: 470px;
+}
+
+.open-button {
+    width: 20px;
+    height: 20px;
+    background-image: url("http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911632directionaldown.png");
+    background-size: cover;
+}
+
+.open-button {
+    width: 20px;
+    height: 20px;
+    background-image: url("http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911632directionaldown.png");
+    background-size: cover;
+}
+
+.close-button {
+    width: 20px;
+    height: 20px;
+    background-image: url("https://www.labeeb-iot.com/wp-content/uploads/2017/02/top.png");
+    background-size: cover;
+}
+
+.active {
+    color: white;
+    background-color: darkgray;
+}
+
+.close-select {
+    height: 0px;
+}
