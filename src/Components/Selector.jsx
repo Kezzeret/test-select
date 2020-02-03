@@ -71,7 +71,13 @@ export default function Selector(props) {
             <div className={selectStyle}>
                 {books.map((book, index) => {
                     if (books.length === index + 1) {
-                        return <div ref={lastBookElementRef} key={book}>{book}</div>
+                        return <div
+                            onMouseEnter={handleEnter}
+                            onMouseLeave={handleLeave}
+                            onClick={handleClick}
+                            className={'not-active'}
+                            ref={lastBookElementRef}
+                            key={book}>{book}</div>
                     }
                     else {
                         return <div
