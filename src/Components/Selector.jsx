@@ -13,7 +13,8 @@ export default function Selector(props) {
         books,
         hasMore,
         loading,
-        error
+        error,
+        empty
     } = useBookSearch(query, pageNumber)
 
     const observer = useRef();
@@ -29,6 +30,10 @@ export default function Selector(props) {
     }, [loading, hasMore])
 
     function handleSearch(e) {
+        if (isOpen === 'open-button') {
+            setSelectStyle('open-select select')
+            setOpen('close-button');
+        }
         setQuery(e.target.value);
         setPageNumber(1);
     }
@@ -56,8 +61,7 @@ export default function Selector(props) {
             setOpen('open-button')
         }
     }
-
-    useBookSearch(query, pageNumber)
+    
     return (
         <div className={'main-selector'}>
             <div className={'main-input'}>
@@ -68,7 +72,8 @@ export default function Selector(props) {
                 {books.map((book, index) => {
                     if (books.length === index + 1) {
                         return <div ref={lastBookElementRef} key={book}>{book}</div>
-                    } else {
+                    }
+                    else {
                         return <div
                             onMouseEnter={handleEnter}
                             onMouseLeave={handleLeave}
@@ -79,6 +84,7 @@ export default function Selector(props) {
                 })}
                 <div>{loading && 'Loading..'}</div>
                 <div>{error && 'Error'}</div>
+                <div>{empty && 'No results'}</div>
             </div>
         </div>
     )

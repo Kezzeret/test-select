@@ -6,6 +6,7 @@ export default function useBookSearch (query, pageNumber) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [books, setBooks] = useState([]);
+    const [empty, setEmpty] = useState(false);
     const [hasMore, setHasMore] = useState(false);
 
     //очищаем прошлые значения, чтоыб не было "наслаивания"
@@ -16,6 +17,7 @@ export default function useBookSearch (query, pageNumber) {
     useEffect(() => {
         setLoading(true);
         setError(false);
+        setEmpty(false);
         let cancel;
         axios({
             method: 'GET',
@@ -26,9 +28,11 @@ export default function useBookSearch (query, pageNumber) {
             setBooks(prevBooks => {
                 return [...new Set([...prevBooks, ...res.data.docs.map(b => b.title)])]
             })
+            if (res.data.num_found === 0 && query) {
+                setEmpty(true);
+            }
             setHasMore(res.data.docs.length > 0);
             setLoading(false);
-            console.log(res.data)
         }).catch(e => {
             if (axios.isCancel(e)) return
             setError(true);
@@ -36,8 +40,7 @@ export default function useBookSearch (query, pageNumber) {
         return () => cancel();
         }, [query, pageNumber]
     )
-
     return (
-        { loading, error, books, hasMore}
+        { loading, error, books, hasMore, empty}
     )
 }
